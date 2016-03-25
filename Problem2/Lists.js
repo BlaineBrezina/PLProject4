@@ -71,30 +71,66 @@ var list = function() {
         }
 
         f.iterator = function() {
-            var currentElem = "jfkd";
+            //document.writeln("<BR>****OUT OF CLOSURE")
+            var currentElem = l.head;
             var currentHead = l.head;
 
             return function() {
-                
-                if (l.length === 0){
-                    currentElem = "jfkd";
-                    document.writeln("length0")
-                    return null
-                }
-                else if (currentElem === "jfkd") {
-                    document.writeln("first")
-                    currentElem = l.head;
-                } else if (currentElem.next.data === null){
-                    document.writeln("end")
-                    return null;
-                } else if (currentHead !== l.head) {
-                    document.writeln("reset")
+                //document.writeln("<BR>----------------");
+                //document.writeln("<BR>Before currentElem: "+currentElem.data);
+                //document.writeln("<BR>Before currentHead: "+currentHead.data);
+                //document.writeln("<BR>Before real Head: "+ l.head.data);
+
+
+                // if the length of the list is 0
+                if (currentHead !== l.head) {
+                    //document.writeln("<BR>type: original head no longer = current head");
                     currentHead = l.head;
                     currentElem = l.head;
-                } else {
-                    document.writeln("norm")
-                    currentElem = currentElem.next;
+                    //document.writeln("<BR>****current elem changed");
                 }
+
+                // if first run and current Elem has not been set
+                else if (currentElem === "blank") {
+                    //document.writeln("<BR>type: first, current Elem blank");
+                    currentElem = l.head;
+                    //document.writeln("<BR>****current elem changed");
+                }
+                // if the next element is null
+                else if (currentElem.data === null) {
+                    //document.writeln("<BR>type: next node is null - end");
+                    //document.writeln("<BR>Before currentElem: " + currentElem.data);
+                    //document.writeln("<BR>Before currentHead: " + currentHead.data);
+                    //document.writeln("<BR>Before real Head: " + l.head.data);
+                    //document.writeln("<BR>----------------");
+                    return null;
+                }
+                // if reset and length of list is 1
+                else if (l.length === 1){
+                    currentElem = currentHead
+                    //document.writeln("<BR>****current elem changed");
+                }
+                // if the head changed (cdr)
+                else if (l.length === 0){
+                    //currentElem = "blank";
+                    //document.writeln("<BR>****current elem changed");
+                    //document.writeln("<BR>type: length of list is 0");
+                    //document.writeln("<BR>Before currentElem: "+currentElem.data);
+                    //document.writeln("<BR>Before currentHead: "+currentHead.data);
+                    //document.writeln("<BR>Before real Head: "+ l.head.data);
+                    //document.writeln("<BR>----------------");
+                    return null
+                }
+                // normal situation, move to next element
+                else {
+                    //document.writeln("<BR>type: normal iteration");
+                    currentElem = currentElem.next;
+                    //document.writeln("<BR>****current elem changed");
+                }
+                //document.writeln("<BR>After currentElem: "+currentElem.data);
+                //document.writeln("<BR>After currentHead: "+currentHead.data);
+                //document.writeln("<BR>After real Head: "+ l.head.data);
+                //document.writeln("<BR>----------------");
                 return currentElem.data;
             }
         }()
@@ -144,35 +180,89 @@ for(var i = 1; i < l4.length(); i++) {
 }
 
 var l5 = new list();
-document.writeln(l5.iterator());
+document.writeln("<BR>"+l5.iterator());
 l5.cons('x');
-
-//document.writeln("added x")
-document.writeln(l5.iterator());
+document.writeln("<BR>XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+document.writeln("<BR>step: added x")
+document.writeln("<BR>"+l5.iterator());
 l5.cdr();
-//document.writeln("cdr")
-document.writeln(l5.iterator());
+document.writeln("<BR>XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+document.writeln("<BR>step: cdr")
+document.writeln("<BR>"+l5.iterator());
 l5.cons('the');
-//document.writeln("%added the%")
-document.writeln(l5.iterator());
+document.writeln("<BR>XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+document.writeln("<BR>step: added the")
+document.writeln("<BR>"+l5.iterator());
 l5.cons('cat');
-//document.writeln("%added cat%")
-document.writeln(l5.iterator());
+document.writeln("<BR>XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+document.writeln("<BR>step: added cat")
+document.writeln("<BR>"+l5.iterator());
 l5.cons('sat');
-//document.writeln("%added sat%")
-document.writeln(l5.iterator());
+document.writeln("<BR>XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+document.writeln("<BR>added sat")
+document.writeln("<BR>"+l5.iterator());
 l5.cons('in');
-//document.writeln("%added in%")
-document.writeln(l5.iterator());
+document.writeln("<BR>XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+document.writeln("<BR>step: added in")
+document.writeln("<BR>"+l5.iterator());
 l5.cons('bag');
-//document.writeln("5added bag%")
-document.writeln(l5.iterator());
+document.writeln("<BR>XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+document.writeln("<BR>step: added bag")
+document.writeln("<BR>"+l5.iterator());
 l5.cdr();
-//document.writeln("$cdr%")
+document.writeln("<BR>XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+document.writeln("<BR>step: cdr")
 
-document.writeln(l5.iterator());
+document.writeln("<BR>"+l5.iterator());
 
 l5.cons('y');
-//document.writeln("%added y%")
+document.writeln("<BR>XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+document.writeln("<BR>step: added y")
 
-document.writeln(l5.iterator());
+document.writeln("<BR>"+l5.iterator());
+
+document.writeln("<BR>"+l5.iterator());
+document.writeln("<BR>"+l5.iterator());
+document.writeln("<BR>"+l5.iterator());
+document.writeln("<BR>"+l5.iterator());
+document.writeln("<BR>"+l5.iterator());
+document.writeln("<BR>"+l5.iterator());
+
+document.writeln("<BR>############WITHOUT COMMENTS##########");
+var l6 = new list();
+document.writeln("<BR>"+l6.iterator());
+l6.cons('x');
+
+document.writeln("<BR>"+l6.iterator());
+l6.cdr();
+
+document.writeln("<BR>"+l6.iterator());
+l6.cons('the');
+
+document.writeln("<BR>"+l6.iterator());
+l6.cons('cat');
+
+document.writeln("<BR>"+l6.iterator());
+l6.cons('sat');
+
+document.writeln("<BR>"+l6.iterator());
+l6.cons('in');
+
+document.writeln("<BR>"+l6.iterator());
+l6.cons('bag');
+
+document.writeln("<BR>"+l6.iterator());
+l6.cdr();
+
+
+document.writeln("<BR>"+l6.iterator());
+
+l6.cons('y');
+
+document.writeln("<BR>"+l6.iterator());
+document.writeln("<BR>"+l6.iterator());
+document.writeln("<BR>"+l6.iterator());
+document.writeln("<BR>"+l6.iterator());
+document.writeln("<BR>"+l6.iterator());
+document.writeln("<BR>"+l6.iterator());
+document.writeln("<BR>"+l6.iterator());
